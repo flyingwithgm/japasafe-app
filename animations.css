@@ -1,139 +1,146 @@
+/* ===== MODERN ANIMATIONS FOR JAPASAFE ===== */
+/* ===== Smooth Transitions + Micro-Interactions ===== */
 
-## Additional CSS (animations.css)
-
-```css
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideInUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    transform: translateX(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
+/* ----- Button Pulse Effect (CTA Attention) ----- */
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.7);
   }
   70% {
-    box-shadow: 0 0 0 15px rgba(67, 97, 238, 0);
+    box-shadow: 0 0 0 12px rgba(67, 97, 238, 0);
   }
   100% {
     box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
   }
 }
 
-/* Toast notifications */
-.toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 15px 25px;
-  border-radius: 8px;
-  color: white;
-  font-weight: 600;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-  transform: translateY(100px);
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 10000;
+.btn-glow {
+  animation: pulse 2s infinite;
 }
 
-.toast.show {
-  transform: translateY(0);
-  opacity: 1;
+.btn-glow:hover {
+  animation: none; /* Disable on hover */
 }
 
-.toast-success {
-  background-color: #4BB543;
+/* ----- Floating Elements (Subtle Attention) ----- */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-.toast-error {
-  background-color: #FF3333;
+.float {
+  animation: float 3s ease-in-out infinite;
 }
 
-.toast-info {
-  background-color: #2E86C1;
-}
-
-/* Loader */
-.loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-}
-
-.loader-spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: var(--primary-color);
-  animation: spin 1s ease-in-out infinite;
-}
-
+/* ----- Loading Spinner (Ajax/API) ----- */
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-/* Button animations */
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+.loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(67, 97, 238, 0.2);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
 }
 
-.btn-primary:active {
-  transform: translateY(1px);
+/* ----- Page Load Fade-In ----- */
+@keyframes pageLoad {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.btn-secondary:hover {
-  background: rgba(67, 97, 238, 0.1);
-  transform: translateY(-3px);
+body.loaded * {
+  animation: pageLoad 0.6s ease forwards;
 }
 
-.btn-secondary:active {
-  transform: translateY(1px);
+/* ----- Hover Grow (Cards/Buttons) ----- */
+.hover-grow {
+  transition: transform 0.3s ease;
 }
 
-/* Glass card hover effect */
-.glass-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+.hover-grow:hover {
+  transform: scale(1.03);
 }
 
-/* Recording indicator */
+/* ----- Gradient Text (Dynamic Headings) ----- */
+.gradient-text {
+  background: linear-gradient(45deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ----- Toast Notifications ----- */
+@keyframes slideIn {
+  from { transform: translateY(100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(100px); opacity: 0; }
+}
+
+.toast {
+  animation: slideIn 0.3s ease forwards;
+}
+
+.toast.hide {
+  animation: slideOut 0.3s ease forwards;
+}
+
+/* ----- Recording Indicator (Mock Interview) ----- */
+@keyframes recordingPulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
 .recording-dot {
   display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #FF3333;
-  margin-right: 8px;
-  animation: pulse 1.5s infinite;
+  background-color: var(--error);
+  animation: recordingPulse 1.5s infinite;
+}
+
+/* ----- Scroll-Triggered Animations ----- */
+[data-aos="fade-up"] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+[data-aos="fade-up"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ----- Document Upload Dropzone ----- */
+@keyframes dropzonePulse {
+  0% { border-color: rgba(67, 97, 238, 0.2); }
+  50% { border-color: rgba(67, 97, 238, 0.6); }
+  100% { border-color: rgba(67, 97, 238, 0.2); }
+}
+
+.dropzone-active {
+  animation: dropzonePulse 1.5s infinite;
+  border: 2px dashed var(--primary);
 }
