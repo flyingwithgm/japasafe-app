@@ -1,1 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Upload | JapaSafe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="blur-bg"></div>
+  
+  <nav class="glass-nav">
+    <div class="logo">
+      <span class="logo-icon">🌍</span>
+      <span class="logo-text">JapaSafe</span>
+    </div>
+    <div class="nav-links">
+      <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+      <a href="upload.html" class="active"><i class="fas fa-file-upload"></i> Documents</a>
+      <a href="mock.html"><i class="fas fa-comments"></i> Mock Interview</a>
+      <div class="user-dropdown">
+        <img src="assets/images/user-avatar.jpg" alt="User" class="user-avatar">
+        <div class="dropdown-content">
+          <a href="#"><i class="fas fa-user"></i> Profile</a>
+          <a href="#"><i class="fas fa-cog"></i> Settings</a>
+          <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+    <div class="burger-menu">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+  </nav>
 
+  <div class="mobile-menu">
+    <a href="dashboard.html"><i class="fas fa-home"></i></a>
+    <a href="upload.html" class="active"><i class="fas fa-file-upload"></i></a>
+    <a href="mock.html"><i class="fas fa-comments"></i></a>
+    <a href="#"><i class="fas fa-user"></i></a>
+  </div>
+
+  <main class="upload-container">
+    <div class="upload-header">
+      <h1><i class="fas fa-file-upload"></i> Document Upload</h1>
+      <p>Upload and manage all your visa application documents in one secure place</p>
+    </div>
+    
+    <div class="upload-section glass-card">
+      <div class="upload-area" id="dropZone">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <h3>Drag & Drop Files Here</h3>
+        <p>or</p>
+        <button class="btn-primary" id="browseBtn">Browse Files</button>
+        <input type="file" id="fileInput" multiple style="display: none;">
+        <p class="file-types">Supported: PDF, JPG, PNG (Max 10MB each)</p>
+      </div>
+      
+      <div class="upload-progress" id="uploadProgress">
+        <div class="progress-header">
+          <h4>Upload Progress</h4>
+          <span id="uploadStatus">Ready</span>
+        </div>
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="file-list" id="fileList"></div>
+      </div>
+    </div>
+    
+    <div class="documents-section">
+      <div class="section-header">
+        <h2>Your Documents</h2>
+        <div class="search-filter">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search documents...">
+          </div>
+          <select id="docFilter">
+            <option value="all">All Documents</option>
+            <option value="passport">Passport</option>
+            <option value="financial">Financial Proof</option>
+            <option value="admission">Admission Letter</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="documents-grid" id="documentsGrid">
+        <!-- Documents will be loaded here -->
+        <div class="empty-state">
+          <i class="fas fa-folder-open"></i>
+          <h3>No documents uploaded yet</h3>
+          <p>Upload your first document to get started</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Document Preview Modal -->
+  <div class="modal" id="previewModal">
+    <div class="modal-content glass-card large-modal">
+      <span class="close-modal">&times;</span>
+      <div class="preview-header">
+        <h3 id="previewTitle">Document Preview</h3>
+        <div class="preview-actions">
+          <button class="btn-icon" id="downloadBtn"><i class="fas fa-download"></i></button>
+          <button class="btn-icon" id="deleteBtn"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="preview-body" id="previewBody">
+        <iframe id="previewFrame" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/upload.js"></script>
+</body>
+</html>
