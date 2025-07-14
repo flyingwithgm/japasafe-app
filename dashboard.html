@@ -1,1 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | JapaSafe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="blur-bg"></div>
+  
+  <nav class="glass-nav">
+    <div class="logo">
+      <span class="logo-icon">🌍</span>
+      <span class="logo-text">JapaSafe</span>
+    </div>
+    <div class="nav-links">
+      <a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+      <a href="upload.html"><i class="fas fa-file-upload"></i> Documents</a>
+      <a href="mock.html"><i class="fas fa-comments"></i> Mock Interview</a>
+      <div class="user-dropdown">
+        <img src="assets/images/user-avatar.jpg" alt="User" class="user-avatar">
+        <div class="dropdown-content">
+          <a href="#"><i class="fas fa-user"></i> Profile</a>
+          <a href="#"><i class="fas fa-cog"></i> Settings</a>
+          <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+    <div class="burger-menu">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+  </nav>
 
+  <div class="mobile-menu">
+    <a href="dashboard.html" class="active"><i class="fas fa-home"></i></a>
+    <a href="upload.html"><i class="fas fa-file-upload"></i></a>
+    <a href="mock.html"><i class="fas fa-comments"></i></a>
+    <a href="#"><i class="fas fa-user"></i></a>
+  </div>
+
+  <main class="dashboard-container">
+    <div class="sidebar">
+      <div class="user-profile">
+        <img src="assets/images/user-avatar.jpg" alt="User" class="profile-avatar">
+        <h3 id="userName">Loading...</h3>
+        <p id="userEmail">user@example.com</p>
+        <button class="btn-edit"><i class="fas fa-pencil-alt"></i> Edit Profile</button>
+      </div>
+      
+      <div class="sidebar-menu">
+        <div class="menu-item active">
+          <i class="fas fa-home"></i>
+          <span>Dashboard</span>
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-file-upload"></i>
+          <span>Documents</span>
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-comments"></i>
+          <span>Mock Interview</span>
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-calendar"></i>
+          <span>Appointments</span>
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-tips"></i>
+          <span>Tips & Resources</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="main-content">
+      <div class="welcome-banner glass-card">
+        <div class="banner-content">
+          <h2>Welcome back, <span id="welcomeName">User</span>!</h2>
+          <p>Your visa interview preparation journey continues. Let's make sure you're fully prepared.</p>
+        </div>
+        <div class="banner-stats">
+          <div class="stat-item">
+            <span class="stat-value" id="daysLeft">--</span>
+            <span class="stat-label">Days Left</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="documentsCount">0</span>
+            <span class="stat-label">Documents</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="questionsPracticed">0</span>
+            <span class="stat-label">Questions</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="dashboard-grid">
+        <div class="card upcoming-interview glass-card">
+          <div class="card-header">
+            <h3><i class="fas fa-calendar-alt"></i> Upcoming Interview</h3>
+            <button class="btn-icon"><i class="fas fa-edit"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="interviewDateDisplay">No date set</div>
+            <div id="countdownDisplay"></div>
+            <button class="btn-primary btn-small" id="setDateBtn">Set Interview Date</button>
+          </div>
+        </div>
+        
+        <div class="card recent-docs glass-card">
+          <div class="card-header">
+            <h3><i class="fas fa-file-alt"></i> Recent Documents</h3>
+            <a href="upload.html" class="btn-icon"><i class="fas fa-plus"></i></a>
+          </div>
+          <div class="card-body">
+            <div id="documentsList">
+              <div class="empty-state">
+                <i class="fas fa-folder-open"></i>
+                <p>No documents uploaded yet</p>
+                <a href="upload.html" class="btn-secondary btn-small">Upload Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card calendar glass-card">
+          <div class="card-header">
+            <h3><i class="fas fa-calendar"></i> Interview Calendar</h3>
+          </div>
+          <div class="card-body">
+            <div id="calendar"></div>
+          </div>
+        </div>
+        
+        <div class="card quick-tips glass-card">
+          <div class="card-header">
+            <h3><i class="fas fa-lightbulb"></i> Quick Tips</h3>
+          </div>
+          <div class="card-body">
+            <div class="tip-item">
+              <div class="tip-icon"><i class="fas fa-check-circle"></i></div>
+              <div class="tip-content">
+                <h4>Be Concise</h4>
+                <p>Answer questions directly and avoid unnecessary details.</p>
+              </div>
+            </div>
+            <div class="tip-item">
+              <div class="tip-icon"><i class="fas fa-file-signature"></i></div>
+              <div class="tip-content">
+                <h4>Document Organization</h4>
+                <p>Keep all your documents in order and easily accessible.</p>
+              </div>
+            </div>
+            <div class="tip-item">
+              <div class="tip-icon"><i class="fas fa-clock"></i></div>
+              <div class="tip-content">
+                <h4>Arrive Early</h4>
+                <p>Plan to arrive at least 30 minutes before your appointment.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Date Picker Modal -->
+    <div class="modal" id="dateModal">
+      <div class="modal-content glass-card">
+        <span class="close-modal">&times;</span>
+        <h2>Set Interview Date</h2>
+        <div class="input-group">
+          <label for="interviewDate">Interview Date</label>
+          <input type="date" id="interviewDate" required>
+        </div>
+        <div class="input-group">
+          <label for="interviewTime">Time</label>
+          <input type="time" id="interviewTime" required>
+        </div>
+        <div class="input-group">
+          <label for="interviewLocation">Location</label>
+          <input type="text" id="interviewLocation" placeholder="Embassy/Consulate Location">
+        </div>
+        <button class="btn-primary" id="saveDateBtn">Save Date</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
